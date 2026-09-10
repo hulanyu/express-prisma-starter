@@ -1,0 +1,18 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 定义数据表：Post
+model Post {
+  id        Int      @id @default(autoincrement()) // 自增主键 ID
+  title     String                                // 字符串标题
+  content   String?                               // 可选内容
+  published Boolean  @default(false)              // 是否发布，默认 false
+  createdAt DateTime @default(now())              // 创建时间，默认当前时间
+  updatedAt DateTime @updatedAt                   // 更新时间，更新时自动刷新
+}
